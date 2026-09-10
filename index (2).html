@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Happy Birthday, Ky! ♡</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: #56345f;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,.7), transparent 25%),
+        radial-gradient(circle at 85% 85%, rgba(255,255,255,.5), transparent 25%),
+        linear-gradient(135deg, #ffd9eb, #e5d4ff, #f4d8f7);
+    }
+
+    /* Floating hearts & stars */
+
+    .floating {
+      position: fixed;
+      bottom: -50px;
+      z-index: 0;
+      color: rgba(132, 69, 148, .35);
+      font-size: 22px;
+      pointer-events: none;
+      animation: floatUp 9s linear infinite;
+    }
+
+    .one {
+      left: 8%;
+      animation-delay: 0s;
+    }
+
+    .two {
+      left: 25%;
+      animation-delay: 3s;
+    }
+
+    .three {
+      left: 48%;
+      animation-delay: 1.5s;
+    }
+
+    .four {
+      left: 70%;
+      animation-delay: 5s;
+    }
+
+    .five {
+      left: 90%;
+      animation-delay: 2s;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: .5;
+      }
+
+      100% {
+        transform: translateY(-110vh) rotate(30deg);
+        opacity: 0;
+      }
+    }
+
+    /* Main */
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      max-width: 650px;
+      margin: auto;
+      padding: 55px 0 80px;
+      text-align: center;
+    }
+
+    .tiny {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #9764a4;
+      margin-bottom: 9px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      color: #783e89;
+      font-size: clamp(45px, 12vw, 72px);
+      line-height: 1;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      color: #8b6195;
+      font-size: 13px;
+    }
+
+    /* Envelope */
+
+    .envelope-wrapper {
+      width: 270px;
+      margin: 55px auto 20px;
+      cursor: pointer;
+    }
+
+    .envelope {
+      position: relative;
+      width: 270px;
+      height: 180px;
+      background: #c789cf;
+      border-radius: 13px;
+
+      box-shadow:
+        0 18px 40px rgba(104, 48, 119, .22);
+
+      transition: .4s ease;
+    }
+
+    .envelope:hover {
+      transform: translateY(-7px);
+      box-shadow:
+        0 24px 45px rgba(104, 48, 119, .27);
+    }
+
+    /* Letter */
+
+    .inside-letter {
+      position: absolute;
+      width: 88%;
+      height: 145px;
+      left: 6%;
+      bottom: 8px;
+
+      background: #fffafd;
+      border-radius: 8px;
+
+      z-index: 2;
+      padding-top: 22px;
+
+      transition: .8s ease;
+    }
+
+    .inside-letter span {
+      font-family: 'Parisienne', cursive;
+      font-size: 32px;
+      color: #9a55a5;
+    }
+
+    .inside-letter small {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      color: #a77cad;
+      letter-spacing: 1px;
+    }
+
+    /* Flap */
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 0;
+      height: 0;
+
+      border-left: 135px solid transparent;
+      border-right: 135px solid transparent;
+      border-top: 105px solid #b96fc2;
+
+      transform-origin: top;
+      transition: .8s ease;
+
+      z-index: 4;
+    }
+
+    .seal {
+      position: absolute;
+      left: 50%;
+      top: 78px;
+
+      transform: translateX(-50%);
+
+      font-size: 29px;
+      z-index: 5;
+
+      transition: .3s;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope.open .inside-letter {
+      transform: translateY(-110px);
+      z-index: 6;
+    }
+
+    .envelope.open .seal {
+      opacity: 0;
+    }
+
+    .tap {
+      margin-top: 18px;
+      color: #86558f;
+      font-size: 12px;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: .45;
+      }
+    }
+
+    /* Card */
+
+    .card {
+      display: none;
+
+      margin-top: 80px;
+      padding: 35px 27px;
+
+      background: rgba(255, 250, 253, .9);
+
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 25px;
+
+      box-shadow:
+        0 20px 55px rgba(101, 47, 117, .18);
+
+      backdrop-filter: blur(12px);
+
+      text-align: left;
+
+      animation: cardAppear 1s ease;
+    }
+
+    .card.show {
+      display: block;
+    }
+
+    @keyframes cardAppear {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-heading {
+      text-align: center;
+
+      font-family: 'Parisienne', cursive;
+      color: #974aa2;
+
+      font-size: 46px;
+    }
+
+    .birthday {
+      text-align: center;
+
+      font-size: 11px;
+      letter-spacing: 3px;
+
+      color: #a675ae;
+      text-transform: uppercase;
+
+      margin: 3px 0 27px;
+    }
+
+    /* Message */
+
+    .message {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #604866;
+    }
+
+    .message p {
+      margin-bottom: 18px;
+    }
+
+    .highlight {
+      color: #884393;
+      font-weight: 600;
+    }
+
+    /* Main reminder */
+
+    .reminder {
+      margin: 25px 0;
+      padding: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 215, 235, .55),
+          rgba(225, 207, 255, .55)
+        );
+
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .reminder .big {
+      font-family: 'DM Serif Display', serif;
+      color: #7c4388;
+      font-size: 21px;
+      line-height: 1.5;
+    }
+
+    .reminder .tiny-text {
+      margin-top: 7px;
+      font-size: 11px;
+      color: #8d6a94;
+    }
+
+    /* Bible verse */
+
+    .verse-box {
+      margin-top: 30px;
+      padding: 23px 18px;
+
+      text-align: center;
+
+      background: rgba(225, 207, 245, .42);
+
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 19px;
+    }
+
+    .verse {
+      font-family: 'DM Serif Display', serif;
+
+      font-size: 18px;
+      line-height: 1.6;
+
+      color: #70417a;
+    }
+
+    .reference {
+      margin-top: 8px;
+
+      font-size: 12px;
+      letter-spacing: 1px;
+
+      color: #9a6ba2;
+    }
+
+    .verse-note {
+      margin-top: 15px;
+
+      font-size: 12px;
+      line-height: 1.7;
+
+      color: #745b79;
+    }
+
+    .closing {
+      text-align: center;
+
+      color: #86428f;
+      font-weight: 500;
+
+      margin-top: 25px;
+    }
+
+    .signature {
+      text-align: right;
+
+      margin-top: 20px;
+
+      font-family: 'Parisienne', cursive;
+      font-size: 28px;
+
+      color: #9951a3;
+    }
+
+    .sparkles {
+      text-align: center;
+
+      margin-top: 18px;
+
+      letter-spacing: 7px;
+      color: #aa70b3;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 480px) {
+
+      .container {
+        padding-top: 45px;
+      }
+
+      .card {
+        padding: 29px 20px;
+      }
+
+      .message {
+        font-size: 13.5px;
+      }
+
+      .envelope-wrapper,
+      .envelope {
+        width: 250px;
+      }
+
+      .flap {
+        border-left-width: 125px;
+        border-right-width: 125px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- Floating decorations -->
+
+  <div class="floating one">♡</div>
+  <div class="floating two">✦</div>
+  <div class="floating three">♡</div>
+  <div class="floating four">✧</div>
+  <div class="floating five">♡</div>
+
+
+  <main class="container">
+
+    <div class="tiny">
+      a little birthday surprise
+    </div>
+
+    <h1>
+      Happy Birthday, Ky!
+    </h1>
+
+    <div class="subtitle">
+      I made you a little something ♡
+    </div>
+
+
+    <!-- Envelope -->
+
+    <div class="envelope-wrapper" onclick="openLetter()">
+
+      <div class="envelope" id="envelope">
+
+        <div class="flap"></div>
+
+        <div class="inside-letter">
+
+          <span>
+            For Ky ♡
+          </span>
+
+          <small>
+            open me
+          </small>
+
+        </div>
+
+        <div class="seal">
+          ♡
+        </div>
+
+      </div>
+
+      <div class="tap" id="tap">
+        tap the envelope ♡
+      </div>
+
+    </div>
+
+
+    <!-- Birthday Card -->
+
+    <section class="card" id="card">
+
+      <div class="card-heading">
+        For you ♡
+      </div>
+
+      <div class="birthday">
+        a little birthday message
+      </div>
+
+
+      <div class="message">
+
+        <p>
+          Hi Ky!! 💗 HAPPY BIRTHDAYY
+        </p>
+
+
+        <p>
+          I'm really happy na naka-close kita. I really enjoyed
+          getting to know you more🥹
+        </p>
+
+
+        <p>
+          A little reminder to not be too harsh on urself. I know
+          how grade-conscious you are, like me HAHAHA, but I really
+          wanted to tell you this: please don't be too hard on
+          yourself.
+          <span class="highlight">
+            You're more than those numbers 🥹
+          </span>
+
+          Your grades don't define your worth, and they don't take
+          away from the person that you are.
+        </p>
+
+
+        <div class="reminder">
+
+          <div class="big">
+            You're more than those numbers. ♡
+          </div>
+
+          <div class="tiny-text">
+            just a little reminder from me to you
+          </div>
+
+        </div>
+
+
+        <p>
+          You don't have to be the best at everything all the time.
+          It's okay to mess up, have bad days, or feel like you're
+          not doing enough. That doesn't make you any less of a person.
+        </p>
+
+
+        <p>
+          I hope you'll always have the strength to keep going when
+          things get hard, and the courage to keep trying even when
+          you're not sure what you're doing. You don't have to figure
+          everything out right away. Just take things one day at a time.
+        </p>
+
+
+        <p>
+          I hope you have a really good birthday and enjoy your day
+          because you deserve to. I'm really glad that I got to know
+          you this year, and I hope we get to make a lot more memories
+          together. 🤍
+        </p>
+
+
+        <p class="closing">
+          Happy 18th, pretty! I'm always rooting for you. 💗
+        </p>
+
+
+        <!-- Bible Verse -->
+
+        <div class="verse-box">
+
+          <div class="verse">
+            “I can do all things through Christ who strengthens me.”
+          </div>
+
+          <div class="reference">
+            — Philippians 4:13
+          </div>
+
+          <p class="verse-note">
+            I hope you remember this verse whenever things get
+            difficult. You can always ask God for the strength you
+            need, and I hope He continues to guide you through
+            everything that comes your way.
+          </p>
+
+        </div>
+
+
+        <div class="signature">
+          'Yun lang lovelotz🥺
+        </div>
+
+
+        <div class="sparkles">
+          ✦ ♡ ✦
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    function openLetter() {
+
+      const envelope =
+        document.getElementById("envelope");
+
+      const card =
+        document.getElementById("card");
+
+      const tap =
+        document.getElementById("tap");
+
+
+      envelope.classList.add("open");
+
+      tap.innerHTML =
+        "wait... there's something inside ♡";
+
+
+      setTimeout(function() {
+
+        card.classList.add("show");
+
+        setTimeout(function() {
+
+          card.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }, 300);
+
+      }, 900);
+
+    }
+
+  </script>
+
+</body>
+</html>
